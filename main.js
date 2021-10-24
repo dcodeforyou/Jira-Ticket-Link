@@ -40,10 +40,10 @@ async function run() {
       ///////////PAGE///////////////
       const page = await browser.newPage();
 
-      const cookiesFolder = path.join(__dirname + "Cookies");
+      const cookiesFolder = path.join(__dirname, "Cookies");
 
       if(!fs.existsSync(cookiesFolder)){
-          fs.mkdirSync(path.join(__dirname + "Cookies"));
+          fs.mkdirSync(path.join(__dirname, "Cookies"));
       }
 
       let cookies = [];
@@ -62,8 +62,8 @@ async function run() {
             }
       };
 
-      const cookiesFile = path.join(cookiesFolder + "cookies.json");
-      const appsFile = path.join(cookiesFolder + "application.json");
+      const cookiesFile = path.join(cookiesFolder, "cookies.json");
+      const appsFile = path.join(cookiesFolder, "application.json");
       let existedCookies;
       let existedApp;
 
@@ -89,7 +89,7 @@ async function run() {
 
       const profileImage = (await page.$(img.user-picture)) || null;
       if(!profileImage){
-          microsoftLogin(page);
+          await microsoftLogin(page);
           await page.goto("https://teams.microsoft.com/_#/conversations/");
           await page.waitForNavigation();
       }
@@ -101,7 +101,7 @@ async function run() {
 
       /////////////MS-LOGIN/////////////////////
 
-      function microsoftLogin(page){
+      async function microsoftLogin(page){
         await page.goto("https://www.microsoft.com/en-in/microsoft-teams/log-in", { waitUntil: 'networkidle2' });
         await page.click("a[aria-label='Sign in']");
         await page.waitForNavigation();
@@ -331,7 +331,7 @@ async function run() {
 
     ///////////////// STORE COOKIES /////////////////
 
-    function storeCookies(page, type){
+    async function storeCookies(page, type){
         await page.waitForTimeout(10000);
         const ck = await page.cookies();
         cookies = [...ck];
