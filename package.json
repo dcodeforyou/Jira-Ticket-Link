@@ -1,0 +1,21 @@
+{
+  "name": "safd",
+  "version": "1.0.0",
+  "description": "sdfsfssd",
+  "main": "main.js",
+  "scripts": {
+    "test": "df"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "chrome-launcher": "^0.14.1",
+    "dotenv": "^10.0.0",
+    "minimist": "^1.2.5",
+    "puppeteer-core": "^10.4.0",
+    "xvfb": "^0.4.0"
+  },
+  "devDependencies": {},
+  "keywords": []
+}
